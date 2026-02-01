@@ -41,7 +41,7 @@ The backend is built using **Node.js and Express.js**, uses **MongoDB Atlas** as
 
 ---
 ### 1️⃣ Clone the Repository
-git clone https://github.com/amantalukdar24/Task-Management.git
+git clone https://github.com/amantalukdar24/Task-Management/
 cd Task-Management
 
 ## ⚙️ Environment Variables (Backend)
