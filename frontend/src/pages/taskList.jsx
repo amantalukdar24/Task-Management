@@ -57,15 +57,15 @@ function TaskList({login}) {
   return (
     <div className=' flex flex-col w-full px-3 py-2'>
      {login && <div className='flex flex-col items-end py-3 '>
-        <button className='w-[30vw] sm:w-[20vw] md:w-[16vw] lg:w-[12vw] xl:w-[8vw] h-[5vh] text-[1rem] sm:text-[1.2rem] md:text-[1.4rem] font-mono bg-black text-white rounded-[10px] cursor-pointer' onClick={()=>{setAddTaskForm(true)}}>Add Task</button>
+        <button className='w-[30vw] sm:w-[20vw] md:w-[16vw] lg:w-[12vw] xl:w-[9vw] h-[5vh] text-[1rem] sm:text-[1.2rem] md:text-[1.3rem] lg:text-[1.4rem] xl:text-[1.3rem]  font-mono bg-black text-white rounded-[10px] cursor-pointer' onClick={()=>{setAddTaskForm(true)}}>Add Task</button>
     </div>}
     {addTaskForm && <Addtaskform setAddTaskForm={setAddTaskForm}/>}  
     {editTaskForm && <Edittaskform setEditTaskForm={setEditTaskForm} taskId={taskId}/>}
     <div className='flex flex-row justify-between  items-center bg-gray-200 border-2 w-full p-2 rounded-xl'>
         <h1 className='text-[1.5rem] text-gray-800 font-[cursive] font-bold '>Tasks</h1>
         <div className='flex flex-row items-center gap-2 px-3'>
-           <h3 className='text-[1rem] sm:text-[1.1rem] md:text-[1.3rem] font-mono font-semibold text-blue-500'>Filter</h3>
-           <select value={filterType} onChange={(e)=>{setFilterType(e.target.value)}} className='w-[30vw] sm:w-[25vw] md:w-[20vw] lg:w-[15vw] xl:w-[10vw] h-[5vh] bg-white font-serif text-[0.9rem] sm:text-[1rem] md:text-[1.2rem]' >
+           <h3 className='text-[1rem] sm:text-[1.1rem] md:text-[1.3rem] xl:text-[1.2rem] font-mono font-semibold text-blue-500'>Filter</h3>
+           <select value={filterType} onChange={(e)=>{setFilterType(e.target.value)}} className='w-[30vw] sm:w-[25vw] md:w-[20vw] lg:w-[15vw] xl:w-[10vw] h-[5vh] bg-white font-serif text-[0.9rem] sm:text-[1rem] md:text-[1.2rem] xl:text-[1rem]' >
             <option value="">All</option>
             <option value="Ongoing">Ongoing</option>
             <option value="Pending">Pending</option>
@@ -75,7 +75,7 @@ function TaskList({login}) {
 </div>
 
     {
-      login &&  tasks.length>0 && <div className='flex fle-row flex-wrap w-full justify-center sm:justify-start  overflow-auto gap-2 px-2 py-3'>
+      login &&  tasks.length>0 && <div className='flex fle-row flex-wrap w-full justify-start items-cente  overflow-auto gap-2 px-2 py-3'>
          {
             filterTasks.map((task)=>{
                 return(
@@ -83,7 +83,7 @@ function TaskList({login}) {
                        <div className=' flex flex-row justify-end items-center w-full '>
                         <button className='text-[1.5rem] w-[3vw] h-[5vh] font-bold cursor-pointer' onClick={()=>{setTools(!tools); setTaskId(task._id)}}>⁝</button>
                         </div> 
-                     <div className='flex flex-row w-full border-b-2 border-dashed h-[4vh] overflow-auto'>
+                     <div className='flex flex-row w-full border-b-2 border-dashed h-[5vh] overflow-auto'>
                         <h1 className='text-[0.9rem] sm:text-[1.1rem] md:text-[1.2rem] font-sans font-semibold '>Title: {task.title}</h1>
                      </div>
                      <div className='flex flex-row w-full h-[12vh] overflow-auto border-b-2 border-dashed  '>

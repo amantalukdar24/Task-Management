@@ -49,9 +49,9 @@ function Edittaskform({setEditTaskForm,taskId}) {
     <div className='absolute top-1/2 left-1/2 translate-x-[-50%] translate-y-[-50%] w-[80vw] sm:w-[70vw] md:w-[60vw] lg:w-[50vw] xl:w-[40vw] h-[55vh] bg-gray-800 rounded-xl px-2 py-3 flex flex-col items-center gap-2'>
      <div className='w-full flex flex-row items-center justify-start'><button className='w-[5vw] h-[5vh] cursor-pointer text-[1.5rem] font-serif font bold text-white' onClick={()=>{setEditTaskForm(false)}}>{`<`}</button></div>
      <h1 className='text-[1.3rem] sm:text-[1.5rem] md:text-[1.8rem] font-mono font-bold text-white'>Edit Task</h1>
-     <input type="text" value={title} onChange={(e)=>{setTitle(e.target.value)}} placeholder='Add Title' className="w-[70vw] sm:w-[60vw] md:w-[50vw] lg:w-[40vw] xl:w-[30vw] h-[5vh] bg-white border-2 text-[1rem] sm:text-[1.1rem] md:text-[1.2rem] rounded-xl p-2"/>
-     <textarea value={description} onChange={(e)=>{setDescription(e.target.value)}} placeholder='Add Description' className="w-[70vw] sm:w-[60vw] md:w-[50vw] lg:w-[40vw] xl:w-[30vw] h-[15vh] bg-white border-2 text-[1rem] sm:text-[1.1rem] md:text-[1.2rem] rounded-xl p-2"/>
-     <select value={status} onChange={(e)=>{setStatus(e.target.value)}} className="w-[70vw] sm:w-[60vw] md:w-[50vw] lg:w-[40vw] xl:w-[30vw] h-[5vh] bg-white border-2 text-[1rem] sm:text-[1.1rem] md:text-[1.2rem] rounded-xl ">
+     <input type="text" value={title} onChange={(e)=>{setTitle(e.target.value)}} placeholder='Add Title' className="w-[70vw] sm:w-[60vw] md:w-[50vw] lg:w-[40vw] xl:w-[30vw] h-[5vh] bg-white border-2 text-[1rem] sm:text-[1.1rem] md:text-[1.2rem] xl:text-[1.1rem] rounded-xl p-2"/>
+     <textarea value={description} onChange={(e)=>{setDescription(e.target.value)}} placeholder='Add Description' className="w-[70vw] sm:w-[60vw] md:w-[50vw] lg:w-[40vw] xl:w-[30vw] h-[15vh] bg-white border-2 text-[1rem] sm:text-[1.1rem] md:text-[1.2rem] xl:text-[1.1rem] rounded-xl p-2"/>
+     <select value={status} onChange={(e)=>{setStatus(e.target.value)}} className="w-[70vw] sm:w-[60vw] md:w-[50vw] lg:w-[40vw] xl:w-[30vw] h-[5vh] bg-white border-2 text-[1rem] sm:text-[1.1rem] md:text-[1.2rem] xl:text-[1.1rem] rounded-xl ">
         <option value="" disabled selected>Select Status</option>
         <option value="Pending">Pending</option>
         <option value="Ongoing">Ongoing</option>
