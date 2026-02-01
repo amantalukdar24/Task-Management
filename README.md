@@ -56,13 +56,13 @@ Create a `.env` file inside the **frontend** directory and add the following:
 VITE_Backend_URL=http://localhost:3000
 
 ## Setup & Run Backend
-cd backend
-npm install
+cd backend,
+npm install,
 npm start
 
 ## Setup & Run Frontend
-cd frontend
-npm install
-npm run build
+cd frontend,
+npm install,
+npm run build,
 npm run dev
 
