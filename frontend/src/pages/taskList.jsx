@@ -11,6 +11,7 @@ function TaskList({login}) {
     const [taskId,setTaskId]=useState("");
     const [filterType,setFilterType]=useState("");
     const [filterTasks,setFilterTasks]=useState([]);
+    const [loading,setLoading]=useState(false);
     useEffect(()=>{
      const getAllTasks=async ()=>{
         const results=await fetch(`${url}/task/getalltask`,{
@@ -29,6 +30,8 @@ function TaskList({login}) {
      getAllTasks();
     },[addTaskForm,editTaskForm,tools,login])
     const handleDeleteTask=async ()=>{
+        if(loading) return;
+        setLoading(true);
         const result=await fetch(`${url}/task/delete`,{
             method:"DELETE",
             headers:{
@@ -41,10 +44,12 @@ function TaskList({login}) {
         if(data.success){
             setTools(false);
             setTaskId("");
+            setLoading(false);
             toast.success(data.mssg);
 
         }
         else{
+            setLoading(false);
             toast.error(data.mssg);
         }
     }

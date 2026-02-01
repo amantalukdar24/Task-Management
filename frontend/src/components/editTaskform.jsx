@@ -5,6 +5,7 @@ function Edittaskform({setEditTaskForm,taskId}) {
     const [title,setTitle]=useState("");
     const [description,setDescription]=useState("");
     const [status,setStatus]=useState("");
+    const [loading,setLoading]=useState(false);
     useEffect(()=>{
         const getTask=async ()=>{
         const result=await fetch(`${url}/task/gettask?taskId=${taskId}`,{
@@ -24,7 +25,10 @@ function Edittaskform({setEditTaskForm,taskId}) {
       getTask();
     },[])
     const handleEditTask=async ()=>{
+        if(loading) return;
+        setLoading(true);
         if(title.length===0 || status.length===0) {
+            setLoading(false);
             toast.error("Title & Status Cannot be empty");
             return;
         }
@@ -38,10 +42,12 @@ function Edittaskform({setEditTaskForm,taskId}) {
         });
         const data=await result.json();
         if(data.success){
+            setLoading(false);
             toast.success(data.mssg);
             setEditTaskForm(false);
         }
         else{
+            setLoading(false);
             toast.error(data.mssg)
         }
     }
@@ -57,7 +63,7 @@ function Edittaskform({setEditTaskForm,taskId}) {
         <option value="Ongoing">Ongoing</option>
         <option value="Done">Done</option>
      </select>
-     <button onClick={()=>{handleEditTask();}} className='mt-5 w-[30vw] sm:w-[25vw] md:w-[20vw] lg:w-[15vw] xl:w-[10vw] h-[5vh] bg-blue-500 text-white rounded-xl text-[1rem] sm:text-[1.2rem] md:text-[1.3rem] font-mono font-semibold cursor-pointer'>Submit</button>
+     <button onClick={()=>{handleEditTask();}} className={`mt-5 w-[30vw] sm:w-[25vw] md:w-[20vw] lg:w-[15vw] xl:w-[10vw] h-[5vh] ${!loading? "bg-blue-500" : "bg-blue-200"} text-white rounded-xl text-[1rem] sm:text-[1.2rem] md:text-[1.3rem] font-mono font-semibold cursor-pointer`}>Submit</button>
     </div>
   )
 }

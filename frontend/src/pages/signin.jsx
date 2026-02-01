@@ -7,11 +7,14 @@ function Signin({setLogin}) {
     const navigate=useNavigate();
    const [password,setPassword]=useState("");
     const [email,setEmail]=useState("");
+    const [loading,setLoading]=useState(false);
       useEffect(()=>{
      if(localStorage.getItem("token")) navigate("/");
      },[]);  
     const handleSubmit=async (e)=>{
         e.preventDefault();
+        if(loading) return;
+        setLoading(true);
    const result=await fetch(`${url}/user/sign-in`,{
             method:"POST",
             headers:{
@@ -22,12 +25,14 @@ function Signin({setLogin}) {
         const data=await result.json();
         if(data.success){
             toast.success(data.mssg);
+            setLoading(false);
             localStorage.setItem("token",data.token);
             setLogin(true);
             navigate("/");
         
         }
         else{
+          setLoading(false);
             toast.error(data.mssg);
         }
     }
@@ -43,7 +48,7 @@ function Signin({setLogin}) {
              <div className='flex flex-row justify-end items-center w-full'>
                <NavLink to="/reset-pass"><h3 className='text-[1rem] sm:text-[1.1rem] md:text-[1.2rem] font-mono font-semibold'>Forgot Password?</h3></NavLink> 
              </div>
-             <button type="submit" className='w-[30vw] sm:w-[25vw] md:w-[20vw] lg:w-[15vw] xl:w-[10vw] h-[5vh] text-[1.1rem] sm:text-[1.3rem] md:text-[1.5rem] bg-black text-white rounded-xl mt-5 cursor-pointer'>Submit</button>
+             <button type="submit" className={`w-[30vw] sm:w-[25vw] md:w-[20vw] lg:w-[15vw] xl:w-[10vw] h-[5vh] text-[1.1rem] sm:text-[1.3rem] md:text-[1.5rem] ${!loading ? "bg-black" : "bg-gray-500"} text-white rounded-xl mt-5 cursor-pointer`}>Submit</button>
         </form>
         <div className='flex flex-row justify-center items-center gap-2'>
           <h4 className='text-[1rem] sm:text-[1.1rem] md:text-[1.3rem] font-serif font-medium '>Don't Have an Account?</h4>

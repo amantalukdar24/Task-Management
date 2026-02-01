@@ -5,9 +5,13 @@ function Addtaskform({setAddTaskForm}) {
     const [title,setTitle]=useState("");
     const [description,setDescription]=useState("");
     const [status,setStatus]=useState("");
+    const [loading,setLoading]=useState(false);
     const handleAddTask=async ()=>{
+        if(loading) return;
+        setLoading(true);
         if(title.length===0 || status.length===0) {
             toast.error("Title & Status Cannot be empty");
+            setLoading(false);
             return;
         }
         const result=await fetch(`${url}/task/create`,{
@@ -20,10 +24,12 @@ function Addtaskform({setAddTaskForm}) {
         });
         const data=await result.json();
         if(data.success){
+            setLoading(false);
             toast.success(data.mssg);
             setAddTaskForm(false);
         }
         else{
+            setLoading(false);
             toast.error(data.mssg)
         }
     }
@@ -38,7 +44,7 @@ function Addtaskform({setAddTaskForm}) {
         <option value="Pending">Pending</option>
         <option value="Ongoing">Ongoing</option>
      </select>
-     <button onClick={()=>{handleAddTask();}} className='mt-5 w-[30vw] sm:w-[25vw] md:w-[20vw] lg:w-[15vw] xl:w-[10vw] h-[5vh] bg-blue-500 text-white rounded-xl text-[1rem] sm:text-[1.2rem] md:text-[1.3rem] font-mono font-semibold cursor-pointer'>Submit</button>
+     <button onClick={()=>{handleAddTask();}} className={`mt-5 w-[30vw] sm:w-[25vw] md:w-[20vw] lg:w-[15vw] xl:w-[10vw] h-[5vh] ${!loading ? " bg-blue-500" :" bg-blue-200"} text-white rounded-xl text-[1rem] sm:text-[1.2rem] md:text-[1.3rem] font-mono font-semibold cursor-pointer`}>Submit</button>
     </div>
   )
 }

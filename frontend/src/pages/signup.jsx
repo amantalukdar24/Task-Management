@@ -7,17 +7,22 @@ function Signup({setLogin}) {
     const [name,setName]=useState("");
     const [password,setPassword]=useState("");
     const [email,setEmail]=useState("");
+    const [loading,setLoading]=useState(false);
       useEffect(()=>{
          if(localStorage.getItem("token")) navigate("/");
          
          },[]); 
     const handleSubmit=async (e)=>{
         e.preventDefault();
+        if(loading) return;
+        setLoading(true);
         if(name.length<3){
+            setLoading(false);
             toast.error("Name must have atleast 3 characters");
             return;
         }
          if(password.length<6 || password.length>16){
+            setLoading(false);
             toast.error("Password must be atleast length of 6 and maximum length 16");
             return;
         }
@@ -32,10 +37,12 @@ function Signup({setLogin}) {
         if(data.success){
             toast.success(data.mssg);
             localStorage.setItem("token",data.token);
+            setLoading(false);
             setLogin(true);
             navigate("/");
         }
         else{
+            setLoading(false);
             toast.error(data.mssg);
         }
     }
@@ -48,7 +55,7 @@ function Signup({setLogin}) {
              <input type="text"  value={name} required placeholder='Enter Your Name' className='w-[80vw] sm:w-[60vw] md:w-[50vw] lg:w-[40vw] xl:w-[30vw] h-[5vh] bg-white rounded-2 border-2 p-2 text-[1rem] font-serif rounded-xl ' onChange={(e)=>{setName(e.target.value)}} />
             <input type="email" value={email} required placeholder='Enter Your Email' className='w-[80vw] sm:w-[60vw] md:w-[50vw] lg:w-[40vw] xl:w-[30vw] h-[5vh] bg-white rounded-2 border-2 p-2 text-[1rem] font-serif rounded-xl ' onChange={(e)=>{setEmail(e.target.value)}} />
              <input type="password"  value={password} required placeholder='Enter Your Password' className='w-[80vw] sm:w-[60vw] md:w-[50vw] lg:w-[40vw] xl:w-[30vw] h-[5vh] bg-white rounded-2 border-2 p-2 text-[1rem] font-serif rounded-xl '  onChange={(e)=>{setPassword(e.target.value)}}/>
-             <button type="submit" className='w-[30vw] sm:w-[25vw] md:w-[20vw] lg:w-[15vw] xl:w-[10vw] h-[5vh] text-[1.1rem] sm:text-[1.3rem] md:text-[1.5rem] bg-black text-white rounded-xl mt-5 cursor-pointer'>Submit</button>
+             <button type="submit" className={`w-[30vw] sm:w-[25vw] md:w-[20vw] lg:w-[15vw] xl:w-[10vw] h-[5vh] text-[1.1rem] sm:text-[1.3rem] md:text-[1.5rem] ${!loading? "bg-black" :"bg-gray-500"} text-white rounded-xl mt-5 cursor-pointer`}>Submit</button>
         </form>
         <div className='flex flex-row justify-center items-center gap-2'>
           <h4 className='text-[1rem] sm:text-[1.1rem] md:text-[1.3rem] font-serif font-medium '>Already Have an Account?</h4>
