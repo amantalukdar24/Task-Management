@@ -51,7 +51,7 @@ PORT=3000
 MONGO_URL=your_mongodb_atlas_connection_string
 JWT_KEY=your_jwt_secret_key
 
-## ⚙️ Environment Variables (Backend)
+## ⚙️ Environment Variables (Frontend)
 Create a `.env` file inside the **frontend** directory and add the following:
 VITE_Backend_URL=http://localhost:3000
 
