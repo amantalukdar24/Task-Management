@@ -1,0 +1,10 @@
+import {createTask,editTask,deleteTask,getTask,getAllTask} from "../controllers/task.js";
+import { AuthUser } from "../middilewares/auth.js";
+import {Router} from "express";
+const router=Router();
+router.post("/create",AuthUser,createTask);
+router.patch("/update",AuthUser,editTask);
+router.delete("/delete",AuthUser,deleteTask);
+router.get("/gettask",AuthUser,getTask);
+router.get("/getalltask",AuthUser,getAllTask);
+export default router;
